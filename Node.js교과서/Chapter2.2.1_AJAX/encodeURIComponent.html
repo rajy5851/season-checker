@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData();
+        formData.append('name', 'Josephna');
+        formData.append('birth', 1994);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    console.log(xhr.responseText);
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+        };
+        xhr.open('POST', 'https://www.zerocho.com/api/post/formdata');
+        xhr.send(formData); // 폼 데이터 객체 전송
+
+        // #1 encodeURIComponent, decodeURIComponent
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {                   // 요청에 대한 콜백
+            if (xhr.readyState === xhr.DONE) {                  // 요청이 완료되면
+                if (xhr.status === 200 || xhr.status === 201) { // 응답 코드가 200이나 201이면
+                    console.log(xhr.responseText);              // 서버에서 보내주는 값
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+        };
+        xhr.open('GET', 'https://www.zerocho.com/api/search/' + encodeURIComponent('노드'));
+        // 한글 주소 인코딩 후 전송
+        xhr.send(); // 요청 전송
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
